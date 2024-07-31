@@ -1,6 +1,5 @@
 <?php
 require_once "../header.php"; // Inclut le header qui établit la connexion à la base de données
-session_start();
 
 $error = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

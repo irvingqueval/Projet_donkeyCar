@@ -1,18 +1,13 @@
 <?php
 require_once "../header.php";  // Ensure this includes session_start()
 
-if (isset($_SESSION['userid'])) {
-    header("Location: success_login.php"); // Redirect if already logged in
-    exit;
-}
-
 $error = '';
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT id, email, password FROM users WHERE email = ?";
-    $stmt = $pdo->prepare($sql);
+    $querry = "SELECT id, email, password FROM users WHERE email = ?";
+    $stmt = $pdo->prepare($querry);
     $stmt->bindParam(1, $email);
     $stmt->execute();
     $user = $stmt->fetch();
@@ -29,14 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
 <body>
 <div class="container">
     <div class="row justify-content-center">

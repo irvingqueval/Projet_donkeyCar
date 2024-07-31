@@ -42,6 +42,16 @@ $pdo = new \PDO(DSN, USER);
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
+        <?php if (isset($_SESSION["userid"])) { ?>
+          <p><?php echo $_SESSION["user_email"]; ?></p>
+          <a class="nav-link" href="/authentification/logout.php">
+            <img src="/logo/Logout.webp" alt="Logout" style="width: 40px; height: 40px;">
+          </a>
+        <?php } else { ?>
+          <a class="nav-link" href="/authentification/login.php">
+            <img src="/logo/connexion.webp" alt="Login" style="width: 40px; height: 40px;">
+          </a>
+        <?php } ?>
       </div>
     </div>
   </nav>
