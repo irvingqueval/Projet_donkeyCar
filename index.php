@@ -1,5 +1,5 @@
 <?php include("header.php");
-$query = "SELECT * FROM voiture";
+$query = "SELECT v.id, v.model, v.description, v.Prix, v.details, v.image FROM voiture v";
 $ps = $pdo->prepare($query);
 $ps->execute();
 ?>
@@ -15,6 +15,9 @@ $ps->execute();
                         <p class="card-text"><?= $donkeycar_voiture['description']; ?></p>
                         <h6 class="card-subtitle mb-2 text-muted"><?= $donkeycar_voiture['Prix']; ?>€</h6>
                         <p class="card-text"><?= $donkeycar_voiture['details']; ?></p>
+                        <button type="button" class="btn btn-outline-success">
+                            <a href="reservation.php?Id=<?= $donkeycar_voiture['id']; ?>">Réserver</a>
+                        </button>
                     </div>
                 </div> 
             </div>
