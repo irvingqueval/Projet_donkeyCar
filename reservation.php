@@ -15,9 +15,6 @@ $ps = $pdo->prepare($query);
 $ps->execute([$voitureId]);
 $donkeycar_voiture = $ps->fetch();
 
-
-
-
 ?>
 
     <div class="container py-5">
