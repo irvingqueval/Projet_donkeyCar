@@ -27,7 +27,7 @@ $donkeycar_voiture = $ps->fetch();
                         <p class="card-text"><strong>Catégories:</strong> <?= htmlspecialchars($donkeycar_voiture['categories']); ?></p>
                         <h6 class="card-subtitle mb-3 text-muted">Prix à la journée : <?= htmlspecialchars($donkeycar_voiture['Prix']); ?>€</h6>
                         <!-- Formulaire de réservation -->
-                        <form method="post" id="reservationForm" class="text-start">
+                        <form method="post" id="reservationForm" class="text-start" name="toto">
                             <div class="mb-3">
                                 <label for="start_date" class="form-label">Date de début:</label>
                                 <input type="date" id="start_date" name="start_date" class="form-control">
@@ -87,7 +87,7 @@ $donkeycar_voiture = $ps->fetch();
     </script>
 <?php
 
-if (isset($_POST) && isset($_SESSION["userid"])) {
+if (!empty($_POST) && isset($_SESSION["userid"])) {
     // Récupérer les informations du formulaire
     $user_id = $_SESSION["userid"];
     $start_date = new DateTime($_POST["start_date"]);
