@@ -21,22 +21,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h2 class="mt-5">Create an Account</h2>
-            <?php if ($error): ?>
+            <h2 class="mt-5">Créer un compte</h2>
+            <?php if ($error) : ?>
                 <div class="alert alert-danger" role="alert">
                     <?= htmlspecialchars($error) ?>
                 </div>
             <?php endif; ?>
             <form method="post" action="register.php">
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email address</label>
+                    <label for="email" class="form-label">Adresse e-mail</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
+                    <label for="password" class="form-label">Mot de passe</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-                <a href="login.php" class="btn btn-secondary">Back to Login</a>
+                <button type="submit" class="btn btn-primary">Créer un compte</button>
+                <a href="login.php" class="btn btn-secondary">Retour à la page d'accueil</a>
             </form>
         </div>

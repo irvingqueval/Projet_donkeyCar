@@ -1,76 +1,72 @@
 <?php
-include("../header.php");
+include "../header.php";
 
-if (isset($_GET['id'])) {
-    $car_id = $_GET['id'];
+$id = $_GET['id'];
 
-    // Récupérer les détails de la voiture à mettre à jour
-    $query = "SELECT * FROM voiture WHERE id = :car_id";
-    $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':car_id', $car_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $car = $stmt->fetch();
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Mise à jour des détails de la voiture
-        $model = $_POST['model'];
-        $description = $_POST['description'];
-        $prix = $_POST['prix'];
-        $details = $_POST['details'];
-        $image = $_POST['image'];
-
-        $update_query = "UPDATE voiture SET model = :model, description = :description, Prix = :prix, details = :details, image = :image WHERE id = :car_id";
-        $update_stmt = $pdo->prepare($update_query);
-        $update_stmt->bindParam(':model', $model);
-        $update_stmt->bindParam(':description', $description);
-        $update_stmt->bindParam(':prix', $prix);
-        $update_stmt->bindParam(':details', $details);
-        $update_stmt->bindParam(':image', $image);
-        $update_stmt->bindParam(':car_id', $car_id, PDO::PARAM_INT);
-
-        if ($update_stmt->execute()) {
-            header("Location: ../index.php");
-            exit;
-        } else {
-            echo "Error updating car.";
-        }
-    }
-} else {
-    echo "No car ID specified.";
+if (!$id) {
+    echo "Aucun identifiant n'a été spécifié.";
+    exit;
 }
+
+// Requête pour récupérer les informations de la série
+$query = "SELECT * FROM voiture WHERE id = :id";
+$stm = $pdo->prepare($query);
+$stm->bindValue(":id", $id, PDO::PARAM_INT);
+$stm->execute();
+$voiture = $stm->fetch(PDO::FETCH_ASSOC);
+
+if (!$voiture) {
+    echo "Série introuvable.";
+    exit;
+}
+
+// Requête pour récupérer les catégories
+$query = "SELECT * FROM Category";
+$statement = $pdo->query($query);
+$categories = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+// Requête pour récupérer les catégories associées à la série
+$query = "SELECT category_id FROM VoitureCategory WHERE voiture_id = :id";
+$stm = $pdo->prepare($query);
+$stm->bindValue(":id", $id, PDO::PARAM_INT);
+$stm->execute([':id' => $id]);
+$VoitureCategories = $stm->fetchAll(PDO::FETCH_COLUMN, 0);
 ?>
 
-<div class="container mt-4">
-    <h2>Update Car</h2>
-    <?php if ($car): ?>
-        <form method="post">
-            <div class="form-group">
-                <label for="model">Model</label>
-                <input type="text" class="form-control" id="model" name="model" value="<?= htmlspecialchars($car['model']); ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" required><?= htmlspecialchars($car['description']); ?></textarea>
-            </div>
-            <div class="form-group">
-                <label for="prix">Price</label>
-                <input type="number" class="form-control" id="prix" name="prix" value="<?= htmlspecialchars($car['Prix']); ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="details">Details</label>
-                <textarea class="form-control" id="details" name="details" required><?= htmlspecialchars($car['details']); ?></textarea>
-            </div>
-            <div class="form-group">
-                <label for="image">Image URL</label>
-                <input type="text" class="form-control" id="image" name="image" value="<?= htmlspecialchars($car['image']); ?>" required>
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Update Car</button>
-        </form>
-    <?php else: ?>
-        <p>No car found.</p>
-    <?php endif; ?>
+<div class="container mt-5">
+    <h2>Mise à jour de la voiture</h2>
+    <form action="updatecar_handler.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
+        <div class="mb-3">
+            <label for="model" class="form-label">Modèle</label>
+            <input type="text" class="form-control" id="model" name="model" value="<?= htmlspecialchars($voiture['model']) ?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description" value="<?= htmlspecialchars($voiture['description']) ?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="prix" class="form-label">Prix</label>
+            <input type="number" class="form-control" id="prix" name="prix" value="<?= htmlspecialchars($voiture['Prix']) ?>" required>
+        </div>
+        <div class="mb-3">
+            <label for="details" class="form-label">Détails</label>
+            <textarea class="form-control" id="details" name="details" rows="3" required><?= htmlspecialchars($voiture['details']) ?></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="categories" class="form-label">Catégories</label><br>
+            <?php foreach ($categories as $category) : ?>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="category<?= htmlspecialchars($category['Id']) ?>" name="categories[]" value="<?= htmlspecialchars($category['Id']) ?>" <?= in_array($category['Id'], $VoitureCategories) ? 'checked' : '' ?>>
+                    <label class="form-check-label" for="category<?= htmlspecialchars($category['Id']) ?>"><?= htmlspecialchars($category['nom']) ?></label>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="mb-3">
+            <img src="<?= htmlspecialchars($voiture['image']); ?>" class="card-img-top" alt="Image de <?= htmlspecialchars($voiture['model']); ?>" style="max-width: 200px;"> <br>
+            <label for="image" class="form-label">Poseter de la voiture</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    </form>
 </div>
-
-</body>
-
-</html>

@@ -10,8 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':car_id', $car_id, PDO::PARAM_INT);
 
     if ($stmt->execute()) {
-        echo "Car deleted successfully.";
+        echo "Car supprimé avec succès.";
     } else {
-        echo "Error deleting car.";
+        echo "Erreur de suppression de la voiture.";
     }
 }

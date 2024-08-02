@@ -36,7 +36,7 @@ if (!empty($_POST) && isset($_SESSION["userid"])) {
     $stmt->bindParam(':km_illimiter', $km_illimiter, PDO::PARAM_INT);
     $stmt->bindParam(':prix_total', $prix_total, PDO::PARAM_STR);
     $stmt->execute();
-    
+
     // Redirect to the reservation_success page after successful reservation
     header("Location: reservation_success.php");
     exit();
