@@ -60,7 +60,7 @@ CREATE TABLE `Reservation` (
   KEY `user_ID` (`user_ID`),
   CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`voiture_ID`) REFERENCES `Voiture` (`Id`),
   CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`user_ID`) REFERENCES `Users` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +69,7 @@ CREATE TABLE `Reservation` (
 
 LOCK TABLES `Reservation` WRITE;
 /*!40000 ALTER TABLE `Reservation` DISABLE KEYS */;
+INSERT INTO `Reservation` VALUES (1,3,1,'2024-07-25','2024-08-02',1,869.92,1),(2,19,1,'2024-07-25','2024-07-26',1,135.99,1),(3,19,1,'2024-07-25','2024-07-26',1,135.99,1),(4,19,1,'2024-07-25','2024-07-26',1,135.99,1),(5,2,1,NULL,NULL,0,0.00,0),(6,2,1,NULL,NULL,0,0.00,0),(7,2,1,'2024-08-15','2024-08-29',0,839.86,0),(8,2,1,'2024-08-15','2024-08-29',0,839.86,0),(9,3,1,NULL,NULL,0,0.00,0),(10,17,2,'2024-08-15','2024-08-22',1,706.93,1),(11,20,2,'2024-08-01','2024-08-02',1,220.99,1),(12,20,2,'2024-08-01','2024-08-02',1,220.99,1),(13,25,2,'2024-08-08','2024-08-15',1,776.93,1),(14,2,2,'2024-08-08','2024-08-15',1,489.93,1);
 /*!40000 ALTER TABLE `Reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -85,7 +86,7 @@ CREATE TABLE `Users` (
   `Password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,7 +95,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'irvingqueval@gmail.com','$2y$10$jJ9lheRQl5pAw2KP0q75LOV.OL01IfNEYaIZZZrxEPPLjx57DpLqG');
+INSERT INTO `Users` VALUES (1,'irvingqueval@gmail.com','$2y$10$jJ9lheRQl5pAw2KP0q75LOV.OL01IfNEYaIZZZrxEPPLjx57DpLqG'),(2,'test1@exemple.com','$2y$10$.X3WVytq.qg7FEZurYr/1ef.9vj/vQKO7UAOTTfUugRY4lD7qLkxG');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,12 +135,12 @@ DROP TABLE IF EXISTS `VoitureCategory`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `VoitureCategory` (
-  `voiture_id` int NOT NULL,
-  `category_id` int NOT NULL,
-  PRIMARY KEY (`voiture_id`,`category_id`),
+  `voiture_id` int DEFAULT NULL,
+  `category_id` int DEFAULT NULL,
+  KEY `voiture_id` (`voiture_id`),
   KEY `category_id` (`category_id`),
-  CONSTRAINT `voiturecategory_ibfk_1` FOREIGN KEY (`voiture_id`) REFERENCES `Voiture` (`Id`),
-  CONSTRAINT `voiturecategory_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `Category` (`Id`)
+  CONSTRAINT `voiturecategory_ibfk_1` FOREIGN KEY (`voiture_id`) REFERENCES `Voiture` (`Id`) ON DELETE SET NULL,
+  CONSTRAINT `voiturecategory_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `Category` (`Id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -162,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-31 16:12:42
+-- Dump completed on 2024-08-01 14:59:13
