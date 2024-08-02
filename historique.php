@@ -49,33 +49,33 @@ $past_reservations = $stmt_past->fetchAll();
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>Model</th>
+                <th>Modèle</th>
                 <th>Image</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
                 <th>Assurance Annulation</th>
                 <th>KM Illimiter</th>
                 <th>Prix Total</th>
             </tr>
         </thead>
         <tbody>
-        <?php
-        if (count($current_reservations) > 0) {
-            foreach ($current_reservations as $row) {
-                echo "<tr>";
-                echo "<td>" . htmlspecialchars($row["model"]) . "</td>";
-                echo "<td><img src='" . htmlspecialchars($row["image"]) . "' alt='" . htmlspecialchars($row["model"]) . "' width='100'></td>";
-                echo "<td>" . htmlspecialchars($row["start_date"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["end_date"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["assurance_annulation"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["km_illimiter"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["prix_total"]) . "</td>";
-                echo "</tr>";
+            <?php
+            if (count($current_reservations) > 0) {
+                foreach ($current_reservations as $row) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row["model"]) . "</td>";
+                    echo "<td><img src='" . htmlspecialchars($row["image"]) . "' alt='" . htmlspecialchars($row["model"]) . "' width='100'></td>";
+                    echo "<td>" . htmlspecialchars($row["start_date"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["end_date"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["assurance_annulation"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["km_illimiter"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["prix_total"]) . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='7'>Aucune réservation en cours</td></tr>";
             }
-        } else {
-            echo "<tr><td colspan='7'>Aucune réservation en cours</td></tr>";
-        }
-        ?>
+            ?>
         </tbody>
     </table>
 
@@ -83,33 +83,33 @@ $past_reservations = $stmt_past->fetchAll();
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>Model</th>
+                <th>Modèle</th>
                 <th>Image</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
                 <th>Assurance Annulation</th>
                 <th>KM Illimiter</th>
                 <th>Prix Total</th>
             </tr>
         </thead>
         <tbody>
-        <?php
-        if (count($past_reservations) > 0) {
-            foreach ($past_reservations as $row) {
-                echo "<tr>";
-                echo "<td>" . htmlspecialchars($row["model"]) . "</td>";
-                echo "<td><img src='" . htmlspecialchars($row["image"]) . "' alt='" . htmlspecialchars($row["model"]) . "' width='100'></td>";
-                echo "<td>" . htmlspecialchars($row["start_date"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["end_date"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["assurance_annulation"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["km_illimiter"]) . "</td>";
-                echo "<td>" . htmlspecialchars($row["prix_total"]) . "</td>";
-                echo "</tr>";
+            <?php
+            if (count($past_reservations) > 0) {
+                foreach ($past_reservations as $row) {
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($row["model"]) . "</td>";
+                    echo "<td><img src='" . htmlspecialchars($row["image"]) . "' alt='" . htmlspecialchars($row["model"]) . "' width='100'></td>";
+                    echo "<td>" . htmlspecialchars($row["start_date"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["end_date"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["assurance_annulation"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["km_illimiter"]) . "</td>";
+                    echo "<td>" . htmlspecialchars($row["prix_total"]) . "</td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='7'>Aucune réservation passée</td></tr>";
             }
-        } else {
-            echo "<tr><td colspan='7'>Aucune réservation passée</td></tr>";
-        }
-        ?>
+            ?>
         </tbody>
     </table>
 </div>

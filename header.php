@@ -26,22 +26,15 @@ $pdo = new \PDO(DSN, USER);
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/index.php">Home</a>
+            <a class="nav-link active" aria-current="page" href="/index.php">Accueil</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              CRUD
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/voiture/form_addcar.php">Add Car</a></li>
-              <li><a class="dropdown-item" href="#">Delete Car</a></li>
-              <li><a class="dropdown-item" href="#">Update Car</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/voiture/addcars.php">Ajouter une voiture</a>
           </li>
         </ul>
         <form class="d-flex" role="search" method="POST" action="/index.php">
           <input class="form-control me-2" type="search" name="search" placeholder="search" aria-label="Search" value="<?php echo htmlspecialchars($_POST['search'] ?? ''); ?>">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button class="btn btn-outline-success" type="submit">Recherche</button>
         </form>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">

@@ -104,12 +104,7 @@ $results = $ps->fetchAll(PDO::FETCH_ASSOC);
             </div>
         <?php } ?>
     </div>
-    <!-- Ajouter un bouton pour ajouter une nouvelle voiture -->
-    <div class="text-center mt-4">
-        <a class="btn btn-success" href="addcars.php">Ajouter une voiture</a>
-    </div>
-</div>
 
-</body>
+    </body>
 
-</html>
+    </html>

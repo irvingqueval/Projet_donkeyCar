@@ -3,9 +3,9 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="mt-5 text-center">
-                <h2>Registration Successful</h2>
-                <p>Congratulations! You have successfully registered.</p>
-                <a href="login.php" class="btn btn-primary">Login Now</a>
+                <h2>Inscription réussie</h2>
+                <p>Nous vous félicitons ! Vous vous êtes inscrit avec succès.</p>
+                <a href="login.php" class="btn btn-primary">Se connecter maintenant</a>
             </div>
         </div>
     </div>
