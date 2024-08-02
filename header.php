@@ -33,7 +33,7 @@ $pdo = new \PDO(DSN, USER);
               CRUD
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Add Car</a></li>
+              <li><a class="dropdown-item" href="/voiture/form_addcar.php">Add Car</a></li>
               <li><a class="dropdown-item" href="#">Delete Car</a></li>
               <li><a class="dropdown-item" href="#">Update Car</a></li>
             </ul>

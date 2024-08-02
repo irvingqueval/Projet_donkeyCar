@@ -42,33 +42,41 @@ $ps->execute();
                     <select class="form-control" id="Category" name="Category" onchange="this.form.submit()">
                         <option value="">Toutes les catégories</option>
                         <?php foreach ($categories as $cat) : ?>
-                            <option value="<?= $cat['id']; ?>" <?= ($categoryFilter == $cat['id']) ? 'selected' : ''; ?>>
-                                <?= $cat['nom']; ?>
+                            <option value="<?= htmlspecialchars($cat['id']); ?>" <?= ($categoryFilter == $cat['id']) ? 'selected' : ''; ?>>
+                                <?= htmlspecialchars($cat['nom']); ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
             </form>
         </div>
-        
         <?php while ($donkeycar_voiture = $ps->fetch()) { ?>
             <div class="col-md-4 mb-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="<?= $donkeycar_voiture['image']; ?>" class="card-img-top" alt="...">
+                    <img src="<?= htmlspecialchars($donkeycar_voiture['image']); ?>" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title"><?= $donkeycar_voiture['model']; ?></h5>
-                        <p class="card-text"><?= $donkeycar_voiture['description']; ?></p>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= $donkeycar_voiture['Prix']; ?>€</h6>
-                        <p class="card-text"><?= $donkeycar_voiture['details']; ?></p>
-                        <button type="button" class="btn btn-outline-success">
-                            <a href="reservation.php?Id=<?= $donkeycar_voiture['id']; ?>">Réserver</a>
+                        <h5 class="card-title"><?= htmlspecialchars($donkeycar_voiture['model']); ?></h5>
+                        <p class="card-text"><?= htmlspecialchars($donkeycar_voiture['description']); ?></p>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= htmlspecialchars($donkeycar_voiture['Prix']); ?>€</h6>
+                        <p class="card-text"><?= htmlspecialchars($donkeycar_voiture['details']); ?></p>
+                        <div class="d-flex justify-content-between">
+                            <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?');" href="voiture/deletecars.php?id=<?= htmlspecialchars($donkeycar_voiture['id']); ?>">Supprimer</a>
+                            <a class="btn btn-primary" href="voiture/updatecars.php?id=<?= htmlspecialchars($donkeycar_voiture['id']); ?>">Mettre à jour</a>
+                        </div>
+                        <button type="button" class="btn btn-outline-success mt-2">
+                            <a href="reservation.php?Id=<?= htmlspecialchars($donkeycar_voiture['id']); ?>">Réserver</a>
                         </button>
                     </div>
-                </div> 
+                </div>
             </div>
         <?php } ?>
+    </div>
+    <!-- Ajouter un bouton pour ajouter une nouvelle voiture -->
+    <div class="text-center mt-4">
+        <a class="btn btn-success" href="addcars.php">Ajouter une voiture</a>
     </div>
 </div>
 
 </body>
+
 </html>
