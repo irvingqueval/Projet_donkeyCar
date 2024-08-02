@@ -93,8 +93,8 @@ $results = $ps->fetchAll(PDO::FETCH_ASSOC);
                         <p class="card-text"><?= htmlspecialchars($voiture['details']); ?></p>
                         <p class="card-text">Catégories : <?= htmlspecialchars($voiture['category_names']); ?></p>
                         <div class="d-flex justify-content-between">
-                            <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?');" href="voiture/deletecars.php?id=<?= htmlspecialchars($donkeycar_voiture['id']); ?>">Supprimer</a>
-                            <a class="btn btn-primary" href="voiture/updatecars.php?id=<?= htmlspecialchars($donkeycar_voiture['id']); ?>">Mettre à jour</a>
+                            <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?');" href="voiture/deletecars.php?id=<?= htmlspecialchars($voiture['id']); ?>">Supprimer</a>
+                            <a class="btn btn-primary" href="voiture/updatecars.php?id=<?= htmlspecialchars($voiture['id']); ?>">Mettre à jour</a>
                         </div>
                         <button type="button" class="btn btn-outline-success">
                             <a href="reservation.php?Id=<?= $voiture['id']; ?>">Réserver</a>
