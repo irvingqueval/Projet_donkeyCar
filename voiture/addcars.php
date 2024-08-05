@@ -1,6 +1,12 @@
 <?php
 include("../header.php");
 
+if (!$isAdmin) {
+    // Redirigez vers la page d'accueil si l'utilisateur n'est pas administrateur
+    header("Location: /access_denied.php");
+    exit;
+}
+
 // Requête pour récupérer les catégories
 $query = "SELECT * FROM Category";
 $statement = $pdo->query($query);

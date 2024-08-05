@@ -1,6 +1,12 @@
 <?php
 include("../header.php");
 
+if (!$isAdmin) {
+    // Redirigez vers la page d'accueil si l'utilisateur n'est pas administrateur
+    header("Location: /access_denied.php");
+    exit;
+}
+
 if (isset($_GET['id'])) {
     $car_id = $_GET['id'];
 

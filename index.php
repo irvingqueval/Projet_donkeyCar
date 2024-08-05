@@ -1,6 +1,14 @@
 <?php
 include("header.php");
 
+// Vérifiez si l'utilisateur est administrateur
+$isAdmin = false;
+if (isset($_SESSION["userid"])) {
+    $stmt = $pdo->prepare("SELECT is_admin FROM users WHERE id = ?");
+    $stmt->execute([$_SESSION["userid"]]);
+    $isAdmin = $stmt->fetchColumn();
+}
+
 // Récupérer les catégories disponibles depuis la base de données
 $query_categories = "SELECT id, nom FROM Category";
 $ps_categories = $pdo->prepare($query_categories);
@@ -92,10 +100,12 @@ $results = $ps->fetchAll(PDO::FETCH_ASSOC);
                         <h6 class="card-subtitle mb-2 text-muted"><?= htmlspecialchars($voiture['Prix']); ?>€</h6>
                         <p class="card-text"><?= htmlspecialchars($voiture['details']); ?></p>
                         <p class="card-text">Catégories : <?= htmlspecialchars($voiture['category_names']); ?></p>
+                        <?php if ($isAdmin): ?>
                         <div class="d-flex justify-content-between">
                             <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?');" href="voiture/deletecars.php?id=<?= htmlspecialchars($voiture['id']); ?>">Supprimer</a>
                             <a class="btn btn-primary" href="voiture/updatecars.php?id=<?= htmlspecialchars($voiture['id']); ?>">Mettre à jour</a>
                         </div>
+                        <?php endif; ?>
                         <a href="reservation.php?Id=<?= $voiture['id']; ?>" class="btn btn-outline-success">Réserver</a>
                     </div>
                 </div>

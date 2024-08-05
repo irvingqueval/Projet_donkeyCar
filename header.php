@@ -1,6 +1,13 @@
 <?php
 require_once "config.php";
 $pdo = new \PDO(DSN, USER);
+
+$isAdmin = false;
+if (isset($_SESSION["userid"])) {
+    $stmt = $pdo->prepare("SELECT is_admin FROM users WHERE id = ?");
+    $stmt->execute([$_SESSION["userid"]]);
+    $isAdmin = $stmt->fetchColumn();
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,9 +35,11 @@ $pdo = new \PDO(DSN, USER);
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/index.php">Accueil</a>
           </li>
+          <?php if ($isAdmin): ?>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/voiture/addcars.php">Ajouter une voiture</a>
           </li>
+          <?php endif; ?>
         </ul>
         <form class="d-flex" role="search" method="POST" action="/index.php">
           <input class="form-control me-2" type="search" name="search" placeholder="search" aria-label="Search" value="<?php echo htmlspecialchars($_POST['search'] ?? ''); ?>">
@@ -42,7 +51,7 @@ $pdo = new \PDO(DSN, USER);
           </li>
         </ul>
         <?php if (isset($_SESSION["userid"])) { ?>
-          <p><?php echo $_SESSION["user_email"]; ?></p>
+          <p><?php echo htmlspecialchars($_SESSION["user_email"]); ?></p>
           <a class="nav-link" href="/authentification/logout.php">
             <img src="/logo/Logout.webp" alt="Logout" style="width: 40px; height: 40px;">
           </a>
