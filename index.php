@@ -83,9 +83,9 @@ $results = $ps->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <?php foreach ($results as $voiture) { ?>
-            <div class="col-md-4 mb-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="<?= htmlspecialchars($voiture['image']); ?>" class="card-img-top" alt="Image de <?= htmlspecialchars($voiture['model']); ?>">
+            <div class="col-12 col-sm-6 col-lg-4 mb-4">
+                <div class="card">
+                    <img src="<?= htmlspecialchars($voiture['image']); ?>" class="card-img-top img-fluid" alt="Image de <?= htmlspecialchars($voiture['model']); ?>">
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($voiture['model']); ?></h5>
                         <p class="card-text"><?= htmlspecialchars($voiture['description']); ?></p>
@@ -96,15 +96,10 @@ $results = $ps->fetchAll(PDO::FETCH_ASSOC);
                             <a class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ?');" href="voiture/deletecars.php?id=<?= htmlspecialchars($voiture['id']); ?>">Supprimer</a>
                             <a class="btn btn-primary" href="voiture/updatecars.php?id=<?= htmlspecialchars($voiture['id']); ?>">Mettre à jour</a>
                         </div>
-                        <button type="button" class="btn btn-outline-success">
-                            <a href="reservation.php?Id=<?= $voiture['id']; ?>">Réserver</a>
-                        </button>
+                        <a href="reservation.php?Id=<?= $voiture['id']; ?>" class="btn btn-outline-success">Réserver</a>
                     </div>
                 </div>
             </div>
         <?php } ?>
     </div>
-
-    </body>
-
-    </html>
+</div>
